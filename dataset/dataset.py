@@ -11,6 +11,57 @@ import glob
 #import dircache
 import pdb
 
+import json
+
+
+with open('device.json', 'r') as devicefile:
+    device = json.load(devicefile)
+    device_id = device['device_id']
+device = torch.device("cuda:{}".format(device_id))
+torch.cuda.set_device(device)
+
+
+def get_test_indices(num_frames, total_frames):
+    half = int(num_frames / 2)
+    mid = int(total_frames / 2)
+    indices = range(mid-half, mid+half)
+    return indices
+
+
+def get_clip(opt, video_path, Total_frames):
+
+    video_path = video_path.replace('BLANK_DELIMITER', ' ')
+
+    clip = []
+    frames = sorted(os.listdir(video_path), key=lambda x: int(x.split('image_')[1].split('.')[0]))
+
+    indices = get_test_indices(opt.sample_duration, Total_frames)
+    
+    for index in indices:
+        frame_path = os.path.join(video_path, frames[index])
+        im = Image.open(frame_path)
+        clip.append(im.copy())
+        im.close()
+    
+    """
+    for frame in frames[:opt.sample_duration]:
+        frame_path = os.path.join(video_path, frame)
+        im = Image.open(frame_path)
+        clip.append(im.copy())
+        im.close()
+    """
+
+    return clip
+
+
+def get_index(i):
+    res = ''
+    length = len(str(i))
+    zeros = 5 - length
+    for j in range(zeros):
+        res += '0'
+    res += str(i)
+    return res
 
 def get_test_video(opt, frame_path, Total_frames):
     """
@@ -30,10 +81,15 @@ def get_test_video(opt, frame_path, Total_frames):
     if opt.modality == 'RGB': 
         while len(clip) < max(opt.sample_duration, Total_frames):
             try:
-                im = Image.open(os.path.join(frame_path, '%05d.jpg'%(i+1)))
+                frame_path = frame_path.replace('BLANK_DELIMITER', ' ')
+                frame_path_2 = os.path.join(frame_path, 'image_{}.jpg'.format(get_index(i+1)))
+                # print(frame_path_2)
+                #im = Image.open(os.path.join(frame_path, '%05d.jpg'%(i+1)))
+                im = Image.open(frame_path_2)
                 clip.append(im.copy())
                 im.close()
             except:
+                print('Failed')
                 pass
             i += 1
             
@@ -308,7 +364,7 @@ class Kinetics_test(Dataset):
        
         # Number of classes
         self.N = len(self.lab_names)
-        assert self.N == 400
+        assert self.N == 5
         
         # indexes for validation set
         if train==1:
@@ -337,16 +393,21 @@ class Kinetics_test(Dataset):
         frame_path = video[0]
         Total_frames = video[2]
 
+        #print('Getting {}'.format(frame_path.replace('BLANK_DELIMITER', ' ')))
+
+        """
         if self.opt.only_RGB:
             Total_frames = len(glob.glob(glob.escape(frame_path) +  '/0*.jpg'))  
         else:
             Total_frames = len(glob.glob(glob.escape(frame_path) +  '/TVL1jpg_y_*.jpg'))
+        """
 
         if self.train_val_test == 0: 
             clip = get_test_video(self.opt, frame_path, Total_frames)
         else:
             clip = get_train_video(self.opt, frame_path, Total_frames)
 
+        #clip = get_clip(self.opt, frame_path, Total_frames)
 
         return((scale_crop(clip, self.train_val_test, self.opt), label_id))
 

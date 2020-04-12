@@ -7,12 +7,19 @@ import random
 import numbers
 import pdb
 import time
+import json
 
 try:
     import accimage
 except ImportError:
     accimage = None
     
+with open('device.json', 'r') as devicefile:
+    device = json.load(devicefile)
+    device_id = device['device_id']
+device = torch.device("cuda:{}".format(device_id))
+torch.cuda.set_device(device)
+
 scale_choice = [1, 1/2**0.25, 1/2**0.5, 1/2**0.75, 0.5]
 crop_positions = ['c', 'tl', 'tr', 'bl', 'br']
 
@@ -289,11 +296,11 @@ def scale_crop(clip, train, opt):
         Tensor(frames) of shape C x T x H x W
     """
     if opt.modality == 'RGB':
-        processed_clip = torch.Tensor(3, len(clip), opt.sample_size, opt.sample_size)
+        processed_clip = torch.Tensor(3, len(clip), opt.sample_size, opt.sample_size).to(device)
     elif opt.modality == 'Flow':
-        processed_clip = torch.Tensor(2, int(len(clip)/2), opt.sample_size, opt.sample_size)
+        processed_clip = torch.Tensor(2, int(len(clip)/2), opt.sample_size, opt.sample_size).to(device)
     elif opt.modality == 'RGB_Flow':
-        processed_clip = torch.Tensor(5, int(len(clip)/3), opt.sample_size, opt.sample_size)
+        processed_clip = torch.Tensor(5, int(len(clip)/3), opt.sample_size, opt.sample_size).to(device)
     
     flip_prob     = random.random()
     scale_factor  = scale_choice[random.randint(0, len(scale_choice) - 1)]
@@ -367,5 +374,5 @@ def scale_crop(clip, train, opt):
                 j += 1
                 if j == 3:
                     j = 0
-                    
+
     return(processed_clip)

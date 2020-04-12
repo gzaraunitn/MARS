@@ -3,6 +3,13 @@ import torch
 from torch import nn
 from models import resnext
 import pdb
+import json
+
+with open('device.json', 'r') as devicefile:
+    device = json.load(devicefile)
+    device_id = device['device_id']
+device = torch.device("cuda:{}".format(device_id))
+torch.cuda.set_device(device)
 
 def generate_model( opt):
     assert opt.model in ['resnext']
@@ -19,8 +26,9 @@ def generate_model( opt):
             output_layers=opt.output_layers)
     
 
-    model = model.cuda()
-    model = nn.DataParallel(model)
+    model = model.cuda(device=device)
+    model = nn.DataParallel(model, [device_id]).cuda(device=device)
+    model = model.to(device)
     
     if opt.pretrain_path:
         print('loading pretrained model {}'.format(opt.pretrain_path))
@@ -28,8 +36,10 @@ def generate_model( opt):
         
         assert opt.arch == pretrain['arch']
         model.load_state_dict(pretrain['state_dict'])
+
         model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
-        model.module.fc = model.module.fc.cuda()
+        model.module.fc = model.module.fc.cuda(device=device)
+
 
         parameters = get_fine_tuning_parameters(model, opt.ft_begin_index)
         return model, parameters

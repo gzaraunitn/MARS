@@ -97,12 +97,12 @@ def parse_opts():
         '--training', 
         action='store_true', 
         help='training/testing')
-    parser.set_defaults(training=True)
+    parser.set_defaults(training=False)
     parser.add_argument(
         '--freeze_BN', 
         action='store_true', 
         help='freeze_BN/testing')
-    parser.set_defaults(freeze_BN=False)
+    parser.set_defaults(freeze_BN=True)
     parser.add_argument(
         '--batch_size', 
         default=20, 
@@ -110,7 +110,7 @@ def parse_opts():
         help='Batch Size')
     parser.add_argument(
         '--n_workers', 
-        default=4, 
+        default=0, 
         type=int, 
         help='Number of workers for dataloader')
 
@@ -176,7 +176,7 @@ def parse_opts():
         '--MARS', 
         action='store_true', 
         help='test MARS')
-    parser.set_defaults(MARS=False)    
+    parser.set_defaults(MARS=True)    
     parser.add_argument(
         '--pretrain_path', 
         default='', 

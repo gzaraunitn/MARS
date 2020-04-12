@@ -7,6 +7,13 @@ from torch.autograd import Variable
 import math
 from functools import partial
 import pdb
+import json
+
+with open('device.json', 'r') as devicefile:
+    device = json.load(devicefile)
+    device_id = device['device_id']
+device = torch.device("cuda:{}".format(device_id))
+torch.cuda.set_device(device)
 
 __all__ = ['ResNeXt', 'resnet50', 'resnet101']
 
@@ -26,9 +33,9 @@ def downsample_basic_block(x, planes, stride):
     out = F.avg_pool3d(x, kernel_size=1, stride=stride)
     zero_pads = torch.Tensor(
         out.size(0), planes - out.size(1), out.size(2), out.size(3),
-        out.size(4)).zero_()
+        out.size(4)).to(device).zero_()
     if isinstance(out.data, torch.cuda.FloatTensor):
-        zero_pads = zero_pads.cuda()
+        zero_pads = zero_pads.cuda(device=device)
 
     out = Variable(torch.cat([out.data, zero_pads], dim=1))
 

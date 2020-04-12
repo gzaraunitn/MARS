@@ -1,0 +1,410 @@
+diff --git a/.gitignore b/.gitignore
+index 1577fec..bcf5f31 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,2 +1,4 @@
+ *.pyc
+ __init__.py
++trained_models/
++dataset/Kinetics/
+\ No newline at end of file
+diff --git a/dataset/dataset.py b/dataset/dataset.py
+index b363c2d..f5b8368 100644
+--- a/dataset/dataset.py
++++ b/dataset/dataset.py
+@@ -11,6 +11,57 @@ import glob
+ #import dircache
+ import pdb
+ 
++import json
++
++
++with open('device.json', 'r') as devicefile:
++    device = json.load(devicefile)
++    device_id = device['device_id']
++device = torch.device("cuda:{}".format(device_id))
++torch.cuda.set_device(device)
++
++
++def get_test_indices(num_frames, total_frames):
++    half = int(num_frames / 2)
++    mid = int(total_frames / 2)
++    indices = range(mid-half, mid+half)
++    return indices
++
++
++def get_clip(opt, video_path, Total_frames):
++
++    video_path = video_path.replace('BLANK_DELIMITER', ' ')
++
++    clip = []
++    frames = sorted(os.listdir(video_path), key=lambda x: int(x.split('image_')[1].split('.')[0]))
++
++    indices = get_test_indices(opt.sample_duration, Total_frames)
++    
++    for index in indices:
++        frame_path = os.path.join(video_path, frames[index])
++        im = Image.open(frame_path)
++        clip.append(im.copy())
++        im.close()
++    
++    """
++    for frame in frames[:opt.sample_duration]:
++        frame_path = os.path.join(video_path, frame)
++        im = Image.open(frame_path)
++        clip.append(im.copy())
++        im.close()
++    """
++
++    return clip
++
++
++def get_index(i):
++    res = ''
++    length = len(str(i))
++    zeros = 5 - length
++    for j in range(zeros):
++        res += '0'
++    res += str(i)
++    return res
+ 
+ def get_test_video(opt, frame_path, Total_frames):
+     """
+@@ -30,10 +81,15 @@ def get_test_video(opt, frame_path, Total_frames):
+     if opt.modality == 'RGB': 
+         while len(clip) < max(opt.sample_duration, Total_frames):
+             try:
+-                im = Image.open(os.path.join(frame_path, '%05d.jpg'%(i+1)))
++                frame_path = frame_path.replace('BLANK_DELIMITER', ' ')
++                frame_path_2 = os.path.join(frame_path, 'image_{}.jpg'.format(get_index(i+1)))
++                # print(frame_path_2)
++                #im = Image.open(os.path.join(frame_path, '%05d.jpg'%(i+1)))
++                im = Image.open(frame_path_2)
+                 clip.append(im.copy())
+                 im.close()
+             except:
++                print('Failed')
+                 pass
+             i += 1
+             
+@@ -308,7 +364,7 @@ class Kinetics_test(Dataset):
+        
+         # Number of classes
+         self.N = len(self.lab_names)
+-        assert self.N == 400
++        assert self.N == 5
+         
+         # indexes for validation set
+         if train==1:
+@@ -337,16 +393,21 @@ class Kinetics_test(Dataset):
+         frame_path = video[0]
+         Total_frames = video[2]
+ 
++        #print('Getting {}'.format(frame_path.replace('BLANK_DELIMITER', ' ')))
++
++        """
+         if self.opt.only_RGB:
+             Total_frames = len(glob.glob(glob.escape(frame_path) +  '/0*.jpg'))  
+         else:
+             Total_frames = len(glob.glob(glob.escape(frame_path) +  '/TVL1jpg_y_*.jpg'))
++        """
+ 
+         if self.train_val_test == 0: 
+             clip = get_test_video(self.opt, frame_path, Total_frames)
+         else:
+             clip = get_train_video(self.opt, frame_path, Total_frames)
+ 
++        #clip = get_clip(self.opt, frame_path, Total_frames)
+ 
+         return((scale_crop(clip, self.train_val_test, self.opt), label_id))
+ 
+diff --git a/dataset/preprocess_data.py b/dataset/preprocess_data.py
+index 29c8654..b2fe950 100644
+--- a/dataset/preprocess_data.py
++++ b/dataset/preprocess_data.py
+@@ -7,12 +7,19 @@ import random
+ import numbers
+ import pdb
+ import time
++import json
+ 
+ try:
+     import accimage
+ except ImportError:
+     accimage = None
+     
++with open('device.json', 'r') as devicefile:
++    device = json.load(devicefile)
++    device_id = device['device_id']
++device = torch.device("cuda:{}".format(device_id))
++torch.cuda.set_device(device)
++
+ scale_choice = [1, 1/2**0.25, 1/2**0.5, 1/2**0.75, 0.5]
+ crop_positions = ['c', 'tl', 'tr', 'bl', 'br']
+ 
+@@ -289,11 +296,11 @@ def scale_crop(clip, train, opt):
+         Tensor(frames) of shape C x T x H x W
+     """
+     if opt.modality == 'RGB':
+-        processed_clip = torch.Tensor(3, len(clip), opt.sample_size, opt.sample_size)
++        processed_clip = torch.Tensor(3, len(clip), opt.sample_size, opt.sample_size).to(device)
+     elif opt.modality == 'Flow':
+-        processed_clip = torch.Tensor(2, int(len(clip)/2), opt.sample_size, opt.sample_size)
++        processed_clip = torch.Tensor(2, int(len(clip)/2), opt.sample_size, opt.sample_size).to(device)
+     elif opt.modality == 'RGB_Flow':
+-        processed_clip = torch.Tensor(5, int(len(clip)/3), opt.sample_size, opt.sample_size)
++        processed_clip = torch.Tensor(5, int(len(clip)/3), opt.sample_size, opt.sample_size).to(device)
+     
+     flip_prob     = random.random()
+     scale_factor  = scale_choice[random.randint(0, len(scale_choice) - 1)]
+@@ -367,5 +374,5 @@ def scale_crop(clip, train, opt):
+                 j += 1
+                 if j == 3:
+                     j = 0
+-                    
++
+     return(processed_clip)
+\ No newline at end of file
+diff --git a/models/model.py b/models/model.py
+index 20b6a80..fa038bb 100644
+--- a/models/model.py
++++ b/models/model.py
+@@ -3,6 +3,13 @@ import torch
+ from torch import nn
+ from models import resnext
+ import pdb
++import json
++
++with open('device.json', 'r') as devicefile:
++    device = json.load(devicefile)
++    device_id = device['device_id']
++device = torch.device("cuda:{}".format(device_id))
++torch.cuda.set_device(device)
+ 
+ def generate_model( opt):
+     assert opt.model in ['resnext']
+@@ -19,8 +26,9 @@ def generate_model( opt):
+             output_layers=opt.output_layers)
+     
+ 
+-    model = model.cuda()
+-    model = nn.DataParallel(model)
++    model = model.cuda(device=device)
++    model = nn.DataParallel(model, [device_id]).cuda(device=device)
++    model = model.to(device)
+     
+     if opt.pretrain_path:
+         print('loading pretrained model {}'.format(opt.pretrain_path))
+@@ -28,8 +36,10 @@ def generate_model( opt):
+         
+         assert opt.arch == pretrain['arch']
+         model.load_state_dict(pretrain['state_dict'])
++
+         model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
+-        model.module.fc = model.module.fc.cuda()
++        model.module.fc = model.module.fc.cuda(device=device)
++
+ 
+         parameters = get_fine_tuning_parameters(model, opt.ft_begin_index)
+         return model, parameters
+diff --git a/models/resnext.py b/models/resnext.py
+index 16251f5..010fb23 100644
+--- a/models/resnext.py
++++ b/models/resnext.py
+@@ -7,6 +7,13 @@ from torch.autograd import Variable
+ import math
+ from functools import partial
+ import pdb
++import json
++
++with open('device.json', 'r') as devicefile:
++    device = json.load(devicefile)
++    device_id = device['device_id']
++device = torch.device("cuda:{}".format(device_id))
++torch.cuda.set_device(device)
+ 
+ __all__ = ['ResNeXt', 'resnet50', 'resnet101']
+ 
+@@ -26,9 +33,9 @@ def downsample_basic_block(x, planes, stride):
+     out = F.avg_pool3d(x, kernel_size=1, stride=stride)
+     zero_pads = torch.Tensor(
+         out.size(0), planes - out.size(1), out.size(2), out.size(3),
+-        out.size(4)).zero_()
++        out.size(4)).to(device).zero_()
+     if isinstance(out.data, torch.cuda.FloatTensor):
+-        zero_pads = zero_pads.cuda()
++        zero_pads = zero_pads.cuda(device=device)
+ 
+     out = Variable(torch.cat([out.data, zero_pads], dim=1))
+ 
+diff --git a/opts.py b/opts.py
+index 605794e..4e5e203 100644
+--- a/opts.py
++++ b/opts.py
+@@ -97,12 +97,12 @@ def parse_opts():
+         '--training', 
+         action='store_true', 
+         help='training/testing')
+-    parser.set_defaults(training=True)
++    parser.set_defaults(training=False)
+     parser.add_argument(
+         '--freeze_BN', 
+         action='store_true', 
+         help='freeze_BN/testing')
+-    parser.set_defaults(freeze_BN=False)
++    parser.set_defaults(freeze_BN=True)
+     parser.add_argument(
+         '--batch_size', 
+         default=20, 
+@@ -110,7 +110,7 @@ def parse_opts():
+         help='Batch Size')
+     parser.add_argument(
+         '--n_workers', 
+-        default=4, 
++        default=0, 
+         type=int, 
+         help='Number of workers for dataloader')
+ 
+@@ -176,7 +176,7 @@ def parse_opts():
+         '--MARS', 
+         action='store_true', 
+         help='test MARS')
+-    parser.set_defaults(MARS=False)    
++    parser.set_defaults(MARS=True)    
+     parser.add_argument(
+         '--pretrain_path', 
+         default='', 
+diff --git a/test_two_stream.py b/test_two_stream.py
+index c2df180..5b7e01b 100644
+--- a/test_two_stream.py
++++ b/test_two_stream.py
+@@ -15,19 +15,36 @@ import sys
+ from utils import AverageMeter, calculate_accuracy, calculate_accuracy_video
+ import random
+ import pdb
++import wandb
++import json
+ 
++with open('device.json', 'r') as devicefile:
++    device = json.load(devicefile)
++    device_id = device['device_id']
++device = torch.device("cuda:{}".format(device_id))
++torch.cuda.set_device(device)
+ 
+ def test():
++
++    print('Using GPU {}'.format(device_id))
++    print('Device: {}'.format(device))
++
++    correct = 0
++
+     opt = parse_opts()
+     print(opt)
+     opt.arch = '{}-{}'.format(opt.model, opt.model_depth)
++
++    wandb.init(
++        project="MARS", name='MARS test', notes=str(opt)
++    )
+     
+     print("Preprocessing validation data ...")
+     data   = globals()['{}_test'.format(opt.dataset)](split = opt.split, train = 0, opt = opt)
+     print("Length of validation data = ", len(data))
+ 
+     print("Preparing datatloaders ...")
+-    val_dataloader = DataLoader(data, batch_size = 1, shuffle=False, num_workers = opt.n_workers, pin_memory = True, drop_last=False)
++    val_dataloader = DataLoader(data, batch_size = 1, shuffle=False, num_workers = opt.n_workers, pin_memory = False, drop_last=False)
+     print("Length of validation datatloader = ",len(val_dataloader))
+ 
+     result_path = "{}/{}/".format(opt.result_path, opt.dataset)
+@@ -37,11 +54,13 @@ def test():
+     # define the model 
+     print("Loading models... ", opt.model, opt.model_depth)
+     model1, parameters1 = generate_model(opt)
++    model1 = model1.to(device)
+ 
+     # if testing RGB+Flow streams change input channels
+     if not opt.only_RGB:
+         opt.input_channels = 2 
+     model2, parameters2 = generate_model(opt)
++    model2 = model2.to(device)
+     
+     if opt.resume_path1:
+         print('loading checkpoint {}'.format(opt.resume_path1))
+@@ -56,20 +75,25 @@ def test():
+ 
+     model1.eval()
+     model2.eval()
++
++    wandb.watch(model1)
++    wandb.watch(model2)
+     
+     accuracies = AverageMeter()
+     
+     if opt.log:
+         if opt.only_RGB:
+-            f = open(os.path.join(root_dir, "test_RGB_MARS_{}{}_{}_{}_{}.txt".format(opt.model, opt.model_depth, opt.dataset, opt.split, opt.sample_duration)), 'w+')
++            f = open("test_RGB_MARS_{}{}_{}_{}_{}.txt".format(opt.model, opt.model_depth, opt.dataset, opt.split, opt.sample_duration), 'w+')
+         else:
+-             f = open(os.path.join(root_dir, "test_RGB_Flow_{}{}_{}_{}_{}.txt".format(opt.model, opt.model_depth, opt.dataset, opt.split, opt.sample_duration)), 'w+')
++             f = open("test_RGB_Flow_{}{}_{}_{}_{}.txt".format(opt.model, opt.model_depth, opt.dataset, opt.split, opt.sample_duration), 'w+')
+         f.write(str(opt))
+         f.write('\n')
+         f.flush()
+     
+     with torch.no_grad():
+         for i, (clip, label) in enumerate(val_dataloader):
++            clip = clip.to(device)
++            label = label.to(device)
+             clip = torch.squeeze(clip)
+             if opt.only_RGB:
+                 inputs = torch.Tensor(int(clip.shape[1]/opt.sample_duration), 3, opt.sample_duration, opt.sample_size, opt.sample_size)
+@@ -81,17 +105,17 @@ def test():
+             else:
+                 RGB_clip  = clip[0:3,:,:,:]
+                 Flow_clip = clip[3:,:,:,:]
+-                inputs1 = torch.Tensor(int(RGB_clip.shape[1]/opt.sample_duration), 3, opt.sample_duration, opt.sample_size, opt.sample_size)
+-                inputs2 = torch.Tensor(int(Flow_clip.shape[1]/opt.sample_duration), 2, opt.sample_duration, opt.sample_size, opt.sample_size)
++                inputs1 = torch.Tensor(int(RGB_clip.shape[1]/opt.sample_duration), 3, opt.sample_duration, opt.sample_size, opt.sample_size).to(device)
++                inputs2 = torch.Tensor(int(Flow_clip.shape[1]/opt.sample_duration), 2, opt.sample_duration, opt.sample_size, opt.sample_size).to(device)
+                 for k in range(inputs1.shape[0]):
+                     inputs1[k,:,:,:,:] = RGB_clip[:,k*opt.sample_duration:(k+1)*opt.sample_duration,:,:]  
+                     inputs2[k,:,:,:,:] = Flow_clip[:,k*opt.sample_duration:(k+1)*opt.sample_duration,:,:]
+-                inputs_var1 = Variable(inputs1)
+-                inputs_var2 = Variable(inputs2)   
++                inputs_var1 = Variable(inputs1).to(device)
++                inputs_var2 = Variable(inputs2).to(device)
+             
+ 
+-            outputs_var1= model1(inputs_var1)
+-            outputs_var2= model2(inputs_var2)
++            outputs_var1= model1(inputs_var1).to(device)
++            outputs_var2= model2(inputs_var2).to(device)
+                 
+             outputs_var = torch.mean(torch.cat((outputs_var1, outputs_var2), dim=0), dim=0).unsqueeze(0)
+ 
+@@ -101,8 +125,25 @@ def test():
+                 
+             accuracies.update(acc, 1)
+ 
++            float_acc_log = {
++                'Average Accuracy': accuracies.avg
++            }
++            wandb.log(float_acc_log)
++
++            if int(pred5[0]) == int(label[0]):
++                prediction = 'correct'
++                correct += 1
++            else:
++                prediction = 'wrong'
++            
+             line = "Video[" + str(i) + "] : \t top5 " + str(pred5) + "\t top1 = " + str(pred5[0]) +  "\t true = " +str(label[0]) + "\t video = " + str(accuracies.avg)
++            if prediction == 'correct':
++                line2 = 'Prediction correct!'
++            else:
++                line2 = 'Prediction wrong'
++            line2 += ' - Correct predictions: {}/{}\n'.format(correct, i+1)
+             print(line)
++            print(line2)
+             if opt.log:
+                 f.write(line + '\n')
+                 f.flush()
