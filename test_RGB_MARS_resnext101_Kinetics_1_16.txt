@@ -29,3 +29,156 @@ Video[26] : 	 top5 [168 160 122 378 207]	 top1 = 168	 true = tensor(168, device=
 Video[27] : 	 top5 [355 168 103 306 275]	 top1 = 355	 true = tensor(168, device='cuda:0')	 video = 0.25
 Video[28] : 	 top5 [164 154 235 323 163]	 top1 = 164	 true = tensor(168, device='cuda:0')	 video = 0.2413793103448276
 Video[29] : 	 top5 [220 107 168 274 156]	 top1 = 220	 true = tensor(168, device='cuda:0')	 video = 0.23333333333333334
+Video[30] : 	 top5 [339 340 341 329 286]	 top1 = 339	 true = tensor(168, device='cuda:0')	 video = 0.22580645161290322
+Video[31] : 	 top5 [192 168 261  51 262]	 top1 = 192	 true = tensor(168, device='cuda:0')	 video = 0.21875
+Video[32] : 	 top5 [151 160 166 367 168]	 top1 = 151	 true = tensor(168, device='cuda:0')	 video = 0.21212121212121213
+Video[33] : 	 top5 [378 168 156 274 118]	 top1 = 378	 true = tensor(168, device='cuda:0')	 video = 0.20588235294117646
+Video[34] : 	 top5 [192 168 199 306 261]	 top1 = 192	 true = tensor(168, device='cuda:0')	 video = 0.2
+Video[35] : 	 top5 [199 378 275 201 306]	 top1 = 199	 true = tensor(168, device='cuda:0')	 video = 0.19444444444444445
+Video[36] : 	 top5 [240 207  92 313   5]	 top1 = 240	 true = tensor(168, device='cuda:0')	 video = 0.1891891891891892
+Video[37] : 	 top5 [199 263 267 103 271]	 top1 = 199	 true = tensor(168, device='cuda:0')	 video = 0.18421052631578946
+Video[38] : 	 top5 [378 275 267 271 168]	 top1 = 378	 true = tensor(168, device='cuda:0')	 video = 0.1794871794871795
+Video[39] : 	 top5 [346  49 209  94 237]	 top1 = 346	 true = tensor(168, device='cuda:0')	 video = 0.175
+Video[40] : 	 top5 [168 275 274 156 378]	 top1 = 168	 true = tensor(168, device='cuda:0')	 video = 0.1951219512195122
+Video[41] : 	 top5 [273 272 378 268 168]	 top1 = 273	 true = tensor(168, device='cuda:0')	 video = 0.19047619047619047
+Video[42] : 	 top5 [207   5 240 378 313]	 top1 = 207	 true = tensor(168, device='cuda:0')	 video = 0.18604651162790697
+Video[43] : 	 top5 [168 160 367 156 207]	 top1 = 168	 true = tensor(168, device='cuda:0')	 video = 0.20454545454545456
+Video[44] : 	 top5 [168 273 272 378 267]	 top1 = 168	 true = tensor(168, device='cuda:0')	 video = 0.2222222222222222
+Video[45] : 	 top5 [393 177  49 337 130]	 top1 = 393	 true = tensor(168, device='cuda:0')	 video = 0.21739130434782608
+Video[46] : 	 top5 [260 120 398 334  20]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.23404255319148937
+Video[47] : 	 top5 [260 343 334 120 119]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.25
+Video[48] : 	 top5 [260 305 330 120 183]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.2653061224489796
+Video[49] : 	 top5 [260 120 398  20 119]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.28
+Video[50] : 	 top5 [ 60 278 240 200  65]	 top1 = 60	 true = tensor(260, device='cuda:0')	 video = 0.27450980392156865
+Video[51] : 	 top5 [260 306  34 398 173]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.28846153846153844
+Video[52] : 	 top5 [260 398 119 333 334]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3018867924528302
+Video[53] : 	 top5 [260 398 120  20 334]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3148148148148148
+Video[54] : 	 top5 [260 398 334 333 343]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.32727272727272727
+Video[55] : 	 top5 [260 398 334 120 343]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3392857142857143
+Video[56] : 	 top5 [398 260 334  20 305]	 top1 = 398	 true = tensor(260, device='cuda:0')	 video = 0.3333333333333333
+Video[57] : 	 top5 [260 120 334 398 305]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3448275862068966
+Video[58] : 	 top5 [ 77 325 278 260 360]	 top1 = 77	 true = tensor(260, device='cuda:0')	 video = 0.3389830508474576
+Video[59] : 	 top5 [260 305 120 119 334]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.35
+Video[60] : 	 top5 [ 20 398 260 395 325]	 top1 = 20	 true = tensor(260, device='cuda:0')	 video = 0.3442622950819672
+Video[61] : 	 top5 [305 395 260 122 261]	 top1 = 305	 true = tensor(260, device='cuda:0')	 video = 0.3387096774193548
+Video[62] : 	 top5 [398 334 120 333  20]	 top1 = 398	 true = tensor(260, device='cuda:0')	 video = 0.3333333333333333
+Video[63] : 	 top5 [398 305 334 120  20]	 top1 = 398	 true = tensor(260, device='cuda:0')	 video = 0.328125
+Video[64] : 	 top5 [305 334 120 260 333]	 top1 = 305	 true = tensor(260, device='cuda:0')	 video = 0.3230769230769231
+Video[65] : 	 top5 [305 120 260 334 398]	 top1 = 305	 true = tensor(260, device='cuda:0')	 video = 0.3181818181818182
+Video[66] : 	 top5 [260 120 343 255 119]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3283582089552239
+Video[67] : 	 top5 [398 357 260 334 318]	 top1 = 398	 true = tensor(260, device='cuda:0')	 video = 0.3235294117647059
+Video[68] : 	 top5 [260 398 334 183 330]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3333333333333333
+Video[69] : 	 top5 [334 120 305 260 398]	 top1 = 334	 true = tensor(260, device='cuda:0')	 video = 0.32857142857142857
+Video[70] : 	 top5 [260 120 398 305  20]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3380281690140845
+Video[71] : 	 top5 [174  49 209 325 175]	 top1 = 174	 true = tensor(260, device='cuda:0')	 video = 0.3333333333333333
+Video[72] : 	 top5 [260 120 398 334  20]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3424657534246575
+Video[73] : 	 top5 [260 398 120  20 334]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.35135135135135137
+Video[74] : 	 top5 [305 260 120 119  19]	 top1 = 305	 true = tensor(260, device='cuda:0')	 video = 0.3466666666666667
+Video[75] : 	 top5 [260 120 305 398 334]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.35526315789473684
+Video[76] : 	 top5 [260 398  20 334 120]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.36363636363636365
+Video[77] : 	 top5 [179  34  19 277 149]	 top1 = 179	 true = tensor(260, device='cuda:0')	 video = 0.358974358974359
+Video[78] : 	 top5 [260 120 398  20 305]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3670886075949367
+Video[79] : 	 top5 [260 120 305 330 119]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.375
+Video[80] : 	 top5 [260  88 330 120 255]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.38271604938271603
+Video[81] : 	 top5 [260 305 134 119 357]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3902439024390244
+Video[82] : 	 top5 [260 398  20 120 334]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.39759036144578314
+Video[83] : 	 top5 [325  77 149  20 260]	 top1 = 325	 true = tensor(260, device='cuda:0')	 video = 0.39285714285714285
+Video[84] : 	 top5 [ 20  18 398 334 255]	 top1 = 20	 true = tensor(260, device='cuda:0')	 video = 0.38823529411764707
+Video[85] : 	 top5 [260 120 119 334 333]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.3953488372093023
+Video[86] : 	 top5 [260 398  20 120 334]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.40229885057471265
+Video[87] : 	 top5 [260 120 305 334 119]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.4090909090909091
+Video[88] : 	 top5 [260 398 334  20 120]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.4157303370786517
+Video[89] : 	 top5 [260 334 120 305 398]	 top1 = 260	 true = tensor(260, device='cuda:0')	 video = 0.4222222222222222
+Video[90] : 	 top5 [333 305 334 260 183]	 top1 = 333	 true = tensor(260, device='cuda:0')	 video = 0.4175824175824176
+Video[91] : 	 top5 [145  65 292 305 398]	 top1 = 145	 true = tensor(260, device='cuda:0')	 video = 0.41304347826086957
+Video[92] : 	 top5 [398 334 260  20 120]	 top1 = 398	 true = tensor(260, device='cuda:0')	 video = 0.40860215053763443
+Video[93] : 	 top5 [ 49 209  48 357 148]	 top1 = 49	 true = tensor(259, device='cuda:0')	 video = 0.40425531914893614
+Video[94] : 	 top5 [259 395 152 105 150]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.4105263157894737
+Video[95] : 	 top5 [259 258 152 305 302]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.4166666666666667
+Video[96] : 	 top5 [259 152 150 395 302]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.422680412371134
+Video[97] : 	 top5 [152 259  34 395 105]	 top1 = 152	 true = tensor(259, device='cuda:0')	 video = 0.41836734693877553
+Video[98] : 	 top5 [258 259 152 302 357]	 top1 = 258	 true = tensor(259, device='cuda:0')	 video = 0.41414141414141414
+Video[99] : 	 top5 [258 152 259 302  43]	 top1 = 258	 true = tensor(259, device='cuda:0')	 video = 0.41
+Video[100] : 	 top5 [259 152 258 150 302]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.4158415841584158
+Video[101] : 	 top5 [259 152 395 150 302]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.4215686274509804
+Video[102] : 	 top5 [ 43 152 302 258 345]	 top1 = 43	 true = tensor(259, device='cuda:0')	 video = 0.4174757281553398
+Video[103] : 	 top5 [259   6 152 150 395]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.4230769230769231
+Video[104] : 	 top5 [259 152 395 302 150]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.42857142857142855
+Video[105] : 	 top5 [ 86 399  87 152  75]	 top1 = 86	 true = tensor(259, device='cuda:0')	 video = 0.42452830188679247
+Video[106] : 	 top5 [259 152 395 258 150]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.42990654205607476
+Video[107] : 	 top5 [302 152  43 259 357]	 top1 = 302	 true = tensor(259, device='cuda:0')	 video = 0.42592592592592593
+Video[108] : 	 top5 [292  13 259 302 145]	 top1 = 292	 true = tensor(259, device='cuda:0')	 video = 0.42201834862385323
+Video[109] : 	 top5 [346 348 140 179 302]	 top1 = 346	 true = tensor(259, device='cuda:0')	 video = 0.41818181818181815
+Video[110] : 	 top5 [258 357 302 305 105]	 top1 = 258	 true = tensor(259, device='cuda:0')	 video = 0.4144144144144144
+Video[111] : 	 top5 [179 256 127 152   1]	 top1 = 179	 true = tensor(259, device='cuda:0')	 video = 0.4107142857142857
+Video[112] : 	 top5 [283  86  87  51 288]	 top1 = 283	 true = tensor(259, device='cuda:0')	 video = 0.40707964601769914
+Video[113] : 	 top5 [258 259 152 302  43]	 top1 = 258	 true = tensor(259, device='cuda:0')	 video = 0.40350877192982454
+Video[114] : 	 top5 [259 152 395 302 150]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.40869565217391307
+Video[115] : 	 top5 [277  84 152 398 302]	 top1 = 277	 true = tensor(259, device='cuda:0')	 video = 0.4051724137931034
+Video[116] : 	 top5 [398 334 305  20 333]	 top1 = 398	 true = tensor(259, device='cuda:0')	 video = 0.4017094017094017
+Video[117] : 	 top5 [240 118  94 105 237]	 top1 = 240	 true = tensor(259, device='cuda:0')	 video = 0.3983050847457627
+Video[118] : 	 top5 [259 152 302 150 395]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.40336134453781514
+Video[119] : 	 top5 [251 220 152 107 259]	 top1 = 251	 true = tensor(259, device='cuda:0')	 video = 0.4
+Video[120] : 	 top5 [107  55 152 147 247]	 top1 = 107	 true = tensor(259, device='cuda:0')	 video = 0.39669421487603307
+Video[121] : 	 top5 [151 160 147 253 367]	 top1 = 151	 true = tensor(259, device='cuda:0')	 video = 0.39344262295081966
+Video[122] : 	 top5 [259 152 395 302 150]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.3983739837398374
+Video[123] : 	 top5 [258 152 302 259 105]	 top1 = 258	 true = tensor(259, device='cuda:0')	 video = 0.3951612903225806
+Video[124] : 	 top5 [387 259 386 347 150]	 top1 = 387	 true = tensor(259, device='cuda:0')	 video = 0.392
+Video[125] : 	 top5 [259 152 395 302 105]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.3968253968253968
+Video[126] : 	 top5 [259 152 302 258 150]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.4015748031496063
+Video[127] : 	 top5 [259  43 302 152 258]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.40625
+Video[128] : 	 top5 [152 302  84 247 304]	 top1 = 152	 true = tensor(259, device='cuda:0')	 video = 0.40310077519379844
+Video[129] : 	 top5 [348 346 152  34  55]	 top1 = 348	 true = tensor(259, device='cuda:0')	 video = 0.4
+Video[130] : 	 top5 [259 395 152 150 258]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.40458015267175573
+Video[131] : 	 top5 [251 218 152 395 259]	 top1 = 251	 true = tensor(259, device='cuda:0')	 video = 0.4015151515151515
+Video[132] : 	 top5 [259 242  15  69 258]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.40601503759398494
+Video[133] : 	 top5 [302 152 258 259  43]	 top1 = 302	 true = tensor(259, device='cuda:0')	 video = 0.40298507462686567
+Video[134] : 	 top5 [302 152  43 259  48]	 top1 = 302	 true = tensor(259, device='cuda:0')	 video = 0.4
+Video[135] : 	 top5 [259 152 258 255 330]	 top1 = 259	 true = tensor(259, device='cuda:0')	 video = 0.40441176470588236
+Video[136] : 	 top5 [ 15 259 258  16 152]	 top1 = 15	 true = tensor(259, device='cuda:0')	 video = 0.40145985401459855
+Video[137] : 	 top5 [147 395  55 325 302]	 top1 = 147	 true = tensor(259, device='cuda:0')	 video = 0.39855072463768115
+Video[138] : 	 top5 [  3  57  51  43 288]	 top1 = 3	 true = tensor(57, device='cuda:0')	 video = 0.39568345323741005
+Video[139] : 	 top5 [ 57 256 127   3 303]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.4
+Video[140] : 	 top5 [ 57   1 304  87  86]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.40425531914893614
+Video[141] : 	 top5 [399 306  34  41  75]	 top1 = 399	 true = tensor(57, device='cuda:0')	 video = 0.4014084507042254
+Video[142] : 	 top5 [252  77 338  60 180]	 top1 = 252	 true = tensor(57, device='cuda:0')	 video = 0.3986013986013986
+Video[143] : 	 top5 [ 57  77   1 289 256]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.4027777777777778
+Video[144] : 	 top5 [289 180  57 276  27]	 top1 = 289	 true = tensor(57, device='cuda:0')	 video = 0.4
+Video[145] : 	 top5 [ 84 311  85 349 399]	 top1 = 84	 true = tensor(57, device='cuda:0')	 video = 0.3972602739726027
+Video[146] : 	 top5 [ 57 276 180   1 252]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.4013605442176871
+Video[147] : 	 top5 [180  79 359  57  27]	 top1 = 180	 true = tensor(57, device='cuda:0')	 video = 0.39864864864864863
+Video[148] : 	 top5 [396   2 242 354 264]	 top1 = 396	 true = tensor(57, device='cuda:0')	 video = 0.3959731543624161
+Video[149] : 	 top5 [ 57  77 180 289 276]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.4
+Video[150] : 	 top5 [399  55  95  75  87]	 top1 = 399	 true = tensor(57, device='cuda:0')	 video = 0.3973509933774834
+Video[151] : 	 top5 [ 87  57   1 127 256]	 top1 = 87	 true = tensor(57, device='cuda:0')	 video = 0.39473684210526316
+Video[152] : 	 top5 [252  77 264 276 180]	 top1 = 252	 true = tensor(57, device='cuda:0')	 video = 0.39215686274509803
+Video[153] : 	 top5 [204   9 242  89 140]	 top1 = 204	 true = tensor(57, device='cuda:0')	 video = 0.38961038961038963
+Video[154] : 	 top5 [  1  57 169 279 230]	 top1 = 1	 true = tensor(57, device='cuda:0')	 video = 0.3870967741935484
+Video[155] : 	 top5 [180 355 158  81 103]	 top1 = 180	 true = tensor(57, device='cuda:0')	 video = 0.38461538461538464
+Video[156] : 	 top5 [ 57  79 331 180 319]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.3885350318471338
+Video[157] : 	 top5 [127  87  86 256 277]	 top1 = 127	 true = tensor(57, device='cuda:0')	 video = 0.3860759493670886
+Video[158] : 	 top5 [  1  57   3 303 333]	 top1 = 1	 true = tensor(57, device='cuda:0')	 video = 0.3836477987421384
+Video[159] : 	 top5 [ 57   1 180  77  27]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.3875
+Video[160] : 	 top5 [  3  57 249  43  51]	 top1 = 3	 true = tensor(57, device='cuda:0')	 video = 0.38509316770186336
+Video[161] : 	 top5 [276 204 180 115 264]	 top1 = 276	 true = tensor(57, device='cuda:0')	 video = 0.38271604938271603
+Video[162] : 	 top5 [ 51 336  87 256   3]	 top1 = 51	 true = tensor(57, device='cuda:0')	 video = 0.3803680981595092
+Video[163] : 	 top5 [ 57 276 180 289 256]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.38414634146341464
+Video[164] : 	 top5 [ 77 325  34  84  60]	 top1 = 77	 true = tensor(57, device='cuda:0')	 video = 0.38181818181818183
+Video[165] : 	 top5 [  1  57 228 230 169]	 top1 = 1	 true = tensor(57, device='cuda:0')	 video = 0.3795180722891566
+Video[166] : 	 top5 [ 57 276 180 252 243]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.38323353293413176
+Video[167] : 	 top5 [276 256  79 180 289]	 top1 = 276	 true = tensor(57, device='cuda:0')	 video = 0.38095238095238093
+Video[168] : 	 top5 [  1 179  43  86  57]	 top1 = 1	 true = tensor(57, device='cuda:0')	 video = 0.378698224852071
+Video[169] : 	 top5 [ 41 127  16 278 295]	 top1 = 41	 true = tensor(57, device='cuda:0')	 video = 0.3764705882352941
+Video[170] : 	 top5 [ 57 233 289 180  26]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.38011695906432746
+Video[171] : 	 top5 [ 51   3 192 256  55]	 top1 = 51	 true = tensor(57, device='cuda:0')	 video = 0.37790697674418605
+Video[172] : 	 top5 [ 75  87 277 192  55]	 top1 = 75	 true = tensor(57, device='cuda:0')	 video = 0.37572254335260113
+Video[173] : 	 top5 [ 26 289  79 331  36]	 top1 = 26	 true = tensor(57, device='cuda:0')	 video = 0.3735632183908046
+Video[174] : 	 top5 [276 180 289  79 204]	 top1 = 276	 true = tensor(57, device='cuda:0')	 video = 0.37142857142857144
+Video[175] : 	 top5 [250 292 223 249 233]	 top1 = 250	 true = tensor(57, device='cuda:0')	 video = 0.3693181818181818
+Video[176] : 	 top5 [ 57   3 127 256   1]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.3728813559322034
+Video[177] : 	 top5 [180 276  37 289 115]	 top1 = 180	 true = tensor(57, device='cuda:0')	 video = 0.3707865168539326
+Video[178] : 	 top5 [ 57   1 289 256 230]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.3743016759776536
+Video[179] : 	 top5 [  1  57 230 228 252]	 top1 = 1	 true = tensor(57, device='cuda:0')	 video = 0.37222222222222223
+Video[180] : 	 top5 [ 57   1 180  77 252]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.3756906077348066
+Video[181] : 	 top5 [ 57   1 180 256 276]	 top1 = 57	 true = tensor(57, device='cuda:0')	 video = 0.3791208791208791
+Video accuracy = 0.3791208791208791

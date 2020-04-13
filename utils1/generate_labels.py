@@ -18,7 +18,7 @@ target_test_labels_path = '../dataset/Kinetics_labels/Kinetics_val_labels.txt'
 target_train_labels = open(target_train_labels_path, 'w')
 target_test_labels = open(target_test_labels_path, 'w')
 
-classes = [c for c in listdir(train_path) if c != 'backflip']
+classes = [c for c in listdir(train_path) if c != 'backflip (human)']
 for c in classes:
     c_path = join(train_path, c)
     videos = listdir(c_path)
@@ -31,7 +31,7 @@ for c in classes:
         out_string = '{} {} {}\n'.format(v_path, class_id, n_frames)
         target_train_labels.write(out_string)
 
-classes = [c for c in listdir(test_path) if c != 'backflip']
+classes = [c for c in listdir(test_path) if c != 'backflip (human)']
 for c in classes:
     c_path = join(test_path, c)
     videos = listdir(c_path)
